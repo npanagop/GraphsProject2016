@@ -21,8 +21,6 @@ public class fleuryAlg {
 
             adj = new boolean[vertices][vertices];
 
-            byte newLine = (byte) '\n';
-
             int i = 0;
             int j = 0;
             char readChar;
