@@ -142,7 +142,7 @@ public class StableMarriage {
             }
         }
 
-        //Εγγραφή δεδομένων
+        //Αποθήκευση αποτελέσματος
         try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("outputSM.txt"), "utf-8"))){
             for (int i = 0; i < pairs; i++) {
                 writer.write(marriages[i][0]+" "+marriages[i][1]+"\n");
