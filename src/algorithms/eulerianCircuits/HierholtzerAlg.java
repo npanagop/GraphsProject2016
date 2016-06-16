@@ -45,6 +45,7 @@ public class HierholtzerAlg {
             System.err.println(e.getMessage());
             return;
         }
+        //**************************************************
 
         //Αρχικοποίηση δομών
 

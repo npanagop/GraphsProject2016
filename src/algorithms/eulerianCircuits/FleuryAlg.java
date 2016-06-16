@@ -52,6 +52,7 @@ public class FleuryAlg {
             System.err.println(e.getMessage());
             return;
         }
+        //**************************************************
 
         //Αρχικοποίηση δομών
 

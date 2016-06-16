@@ -34,6 +34,10 @@ public class PruferToTree {
             System.err.println(e.getMessage());
             return;
         }
+        //**************************************************
+
+        //Αρχικοποίηση δομών
+
         //Το πλήθος των κορυφών
         int n = pruferCode.size()+2;
 

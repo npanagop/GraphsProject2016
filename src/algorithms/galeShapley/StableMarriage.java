@@ -65,8 +65,9 @@ public class StableMarriage {
             System.err.println(e.getMessage());
             return;
         }
+        //**************************************************
 
-        //Αρχικοποίηση
+        //Αρχικοποίηση δομών
 
         //πίνακας με τα ζευγάρια που παντρεύονται
         int[][] marriages = new int[pairs][2];

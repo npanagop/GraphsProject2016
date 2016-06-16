@@ -44,6 +44,7 @@ public class TreeToPrufer {
             System.err.println(e.getMessage());
             return;
         }
+        //**************************************************
 
         //Αρχικοποίηση δομών
 

@@ -46,6 +46,7 @@ public class McLanePlanarity {
             System.err.println(e.getMessage());
             return;
         }
+        //**************************************************
 
         //Αρχικοποίηση δομών
 
