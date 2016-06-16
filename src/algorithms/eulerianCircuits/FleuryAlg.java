@@ -1,4 +1,4 @@
-package algorithms.eulerianCircuits.fleury;
+package algorithms.eulerianCircuits;
 
 import algorithms.Pair;
 
@@ -16,7 +16,7 @@ import java.util.Stack;
  * Το αποτέλεσμα αποθηκεύεται στο αρχείο outputEulFleury.txt με την μορφή "0 1 2 3... 0" που δείχνει το κύκλωμα που
  * βρήκε ο αλγόριθμος.
  */
-public class fleuryAlg {
+public class FleuryAlg {
     public static void main(String[] args) {
 
         //Είσοδος δεδομένων

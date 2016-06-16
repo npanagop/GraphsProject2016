@@ -1,4 +1,4 @@
-package algorithms.eulerianCircuits.hierholtzer;
+package algorithms.eulerianCircuits;
 
 import java.io.*;
 import java.util.Stack;
@@ -14,7 +14,7 @@ import java.util.Stack;
  * Το αποτέλεσμα αποθηκεύεται στο αρχείο outputEulHierholtzer.txt με την μορφή "0 1 2 3... 0" που δείχνει το κύκλωμα που
  * βρήκε ο αλγόριθμος.
  */
-public class hierholtzerAlg {
+public class HierholtzerAlg {
     public static void main(String[] args) {
         //Είσοδος δεδομένων
         boolean[][] adj; //πίνακας γειτνίασης
@@ -80,7 +80,7 @@ public class hierholtzerAlg {
 
         //όσο υπάρχουν κορυφές στο προσωρινό κύκλωμα
         while (!tempCircuit.isEmpty()){
-            //βγάλε τη κορυφή από το πρώτο προσωρινό κύκλωμα
+            //βγάλε τη κορυφή από το προσωρινό κύκλωμα
             currentVertex = tempCircuit.pop();
             //και βάλτην στο τελικό κύκλωμα
             finalCircuit.push(currentVertex);
@@ -97,7 +97,6 @@ public class hierholtzerAlg {
 
                 currentVertex = nextVertex;
                 neighbors = getNeighbors(adj, currentVertex);
-
             }
 
         }
