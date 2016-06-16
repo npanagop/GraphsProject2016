@@ -1,5 +1,7 @@
 package algorithms;
 
+import java.util.Objects;
+
 /**
  * Νίκος Παναγόπουλος 2393 npanagop@csd.auth.gr
  *
@@ -19,5 +21,14 @@ public class Pair<X, Y> extends Object{
     @Override
     public String toString(){
         return "(" + first + "," + second + ")";
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if (!(o instanceof Pair)){
+            return false;
+        }
+        Pair<?, ?> p = (Pair<?, ?>) o;
+        return Objects.equals(first, p.first) && Objects.equals(second, p.second);
     }
 }
