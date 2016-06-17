@@ -49,18 +49,6 @@ public class TuckerAlg {
         }
         //**************************************************
 
-        for (int i = 0; i < vertices; i++) {
-            for (int j = 0; j < vertices; j++) {
-                if (adj[i][j]){
-                    System.out.print("1 ");
-                }
-                else{
-                    System.out.print("0 ");
-                }
-            }
-            System.out.println();
-        }
-
         //Διάσπαση κορυφών
 
         //Πίνακας που περιέχει τον βαθμό κάθε κορυφής

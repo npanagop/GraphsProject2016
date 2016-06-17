@@ -17,12 +17,10 @@ public class TreeToPrufer {
         //Είσοδος δεδομένων
         boolean[][] adj; //πίνακας γειτνίασης
         int vertices;    //πλήθος κορυφών
-        int edges;       //πλήθος ακμών
 
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("inputEul.txt"))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("inputPruferTree.txt"))) {
             String[] lineSplit = bufferedReader.readLine().trim().split(" ");
             vertices = Integer.valueOf(lineSplit[0]);
-            edges = Integer.valueOf(lineSplit[1]);
 
             adj = new boolean[vertices][vertices];
 
@@ -48,18 +46,6 @@ public class TreeToPrufer {
         }
         //**************************************************
 
-        for (int i = 0; i < vertices; i++) {
-            for (int j = 0; j < vertices; j++) {
-                if (adj[i][j]){
-                    System.out.print("1 ");
-                }
-                else{
-                    System.out.print("0 ");
-                }
-            }
-            System.out.println();
-        }
-
         //Αρχικοποίηση δομών
 
         ArrayList<Integer> pruferCode = new ArrayList<>(vertices-2);
@@ -73,6 +59,8 @@ public class TreeToPrufer {
         while (counter<vertices-2){
             //υπολόγισε τον βαθμό κάθε κορυφής
             vertexDegree = getVertexDegree(adj, vertices);
+            for (int i = 0; i < vertices; i++) {
+            }
             //Διέτρεξε τις κορυφές του γράφου
             for (int i = 0; i < vertices; i++) {
                 //αν η κορυφή είναι φύλλο με τη μικρότερη επιγραφή

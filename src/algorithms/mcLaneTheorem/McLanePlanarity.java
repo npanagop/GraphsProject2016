@@ -19,12 +19,10 @@ public class McLanePlanarity {
         //Είσοδος δεδομένων
         boolean[][] adj; //πίνακας γειτνίασης
         int vertices;    //πλήθος κορυφών
-        int edges;       //πλήθος ακμών
 
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("inputEul.txt"))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("inputMcLane.txt"))) {
             String[] lineSplit = bufferedReader.readLine().trim().split(" ");
             vertices = Integer.valueOf(lineSplit[0]);
-            edges = Integer.valueOf(lineSplit[1]);
 
             adj = new boolean[vertices][vertices];
 
@@ -68,6 +66,7 @@ public class McLanePlanarity {
 
         //Λίστα με τις ακμές του γράφου που σχηματίζουν κύκλους
         ArrayList<Pair<Integer, Integer>> listOfEdgesInCycles = new ArrayList<>();
+
 
         int current, previous;
         //Εύρεση των ακμών του γράφου που σχηματίζουν κύκλους
@@ -139,7 +138,7 @@ public class McLanePlanarity {
         visited[currentVertex] = true;
         //Έλεγχος αν οπισθοδρόμησε ο αλγόριθμος και προσαρμογή του path
         if (backtrack){
-            path.add(parent);
+            path.add(currentVertex);
             backtrack = false;
         }
         //Προσθήκη της κορυφής στη διαδρομή του αλγορίθμου.

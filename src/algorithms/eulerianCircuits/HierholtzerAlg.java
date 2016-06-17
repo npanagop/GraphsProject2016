@@ -22,12 +22,10 @@ public class HierholtzerAlg {
         //Είσοδος δεδομένων
         boolean[][] adj; //πίνακας γειτνίασης
         int vertices;    //πλήθος κορυφών
-        int edges;       //πλήθος ακμών
 
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader("inputEul.txt"))) {
             String[] lineSplit = bufferedReader.readLine().trim().split(" ");
             vertices = Integer.valueOf(lineSplit[0]);
-            edges = Integer.valueOf(lineSplit[1]);
 
             adj = new boolean[vertices][vertices];
 
@@ -53,18 +51,6 @@ public class HierholtzerAlg {
         }
         //**************************************************
 
-        for (int i = 0; i < vertices; i++) {
-            for (int j = 0; j < vertices; j++) {
-                if (adj[i][j]){
-                    System.out.print("1 ");
-                }
-                else{
-                    System.out.print("0 ");
-                }
-            }
-            System.out.println();
-        }
-
         //Αρχικοποίηση δομών
 
         //κύκλωμα που δημιουργείται καθώς προχωράει μπροστά ο αλγόριθμος
@@ -76,14 +62,12 @@ public class HierholtzerAlg {
         int nextVertex;
 
         ArrayList<Integer> neighbors = getNeighbors(adj,currentVertex);
-        System.out.println(neighbors.toString());
 
         //Όσο υπάρχει γειτονική κορυφή
         while (!neighbors.isEmpty()) {;
             //η επόμενη κορυφή που θα πάει ο αλγόριθμος
             nextVertex = neighbors.get(0);
             neighbors.remove(0);
-            //System.out.println("next vertex : "+nextVertex);
             //βάλε την κορυφή στο προσωρινό κύκλωμα
             tempCircuit.push(currentVertex);
 
@@ -94,7 +78,6 @@ public class HierholtzerAlg {
             //εύρεση των γειτόνων της νέας κορυφής
             currentVertex = nextVertex;
             neighbors = getNeighbors(adj, currentVertex);
-            System.out.println(neighbors.toString());
             //αν είναι η τελευταία κορυφή που θα προσπελάσει ο αλγόριθμος, βάλτην στο προσωρινό κύκλωμα
             if (neighbors.isEmpty()){
                 tempCircuit.push(currentVertex);
@@ -145,11 +128,9 @@ public class HierholtzerAlg {
      * @return Πίνακας με τους γείτονες της κορυφής.
      */
     private static ArrayList<Integer> getNeighbors(boolean[][] adj, int currentVertex){
-        System.out.println("Vertex: "+currentVertex);
         ArrayList<Integer> neighbors = new ArrayList<>();
         for (int i = 0; i < adj.length; i++) {
             if (adj[currentVertex][i]) {
-                System.out.println("Neighbor : "+i);
                 neighbors.add(i);
             }
         }

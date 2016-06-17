@@ -9,14 +9,14 @@ import java.util.ArrayList;
  *
  * Υλοποίηση του αλγορίθμου Gale-Shapley για το πρόβλημα των σταθερών γάμων.
  *
- * Τα δεδομένα βρίσκονται στο αρχείο inputSM.txt. Το πρώτο στοιχείο δείχνει πόσα ζευγάρια υπάρχουν. Στη συνέχεια
+ * Τα δεδομένα βρίσκονται στο αρχείο inputStableMarriage.txt. Το πρώτο στοιχείο δείχνει πόσα ζευγάρια υπάρχουν. Στη συνέχεια
  * υπάρχουν σειρές της μορφής "άντρας γυναίκα προτίμηση" και όταν τελειώσουν οι άντρες, της μορφής "γυναίκα άντρας
  * προτίμηση". Το κάθε άτομο ταυτοποιείται με έναν αριθμό 0..Ν-1 , όπου Ν το πλήθος των ζευγαριών. Οι προτιμήσεις
  * εκφράζονται με τον ίδιο τρόπο, με το μεγαλύτερο νούμερο να εκφράζει μεγαλύτερη προτίμηση.
  *
  * Ο αλγόριθμος υποθέτει ότι οι άντρες κάνουν τις προτάσεις γάμου.
  *
- * Το αποτέλεσμα αποθηκεύεται στο αρχείο outputSM.txt με την μορφή "άντρας γυναίκα" που δείχνει το ζευγάρι.
+ * Το αποτέλεσμα αποθηκεύεται στο αρχείο outputStableMarriage.txt με την μορφή "άντρας γυναίκα" που δείχνει το ζευγάρι.
  */
 public class StableMarriage {
     public static void main(String[] args) {
@@ -28,7 +28,7 @@ public class StableMarriage {
         int pairs; //το πλήθος τον ζευγαριών
 
         //Ανάγνωση από το αρχείο
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("inputSM.txt"))){
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("inputStableMarriage.txt"))){
             pairs = Integer.valueOf(bufferedReader.readLine().trim());
             int separate = pairs * pairs;
             //αρχικοποίηση πινάκων
@@ -142,7 +142,7 @@ public class StableMarriage {
         }
 
         //Αποθήκευση αποτελέσματος
-        try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("outputSM.txt"), "utf-8"))){
+        try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("outputStableMarriage.txt"), "utf-8"))){
             for (int i = 0; i < pairs; i++) {
                 writer.write(marriages[i][0]+" "+marriages[i][1]+"\n");
             }
