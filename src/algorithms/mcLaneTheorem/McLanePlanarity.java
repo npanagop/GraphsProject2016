@@ -19,30 +19,32 @@ public class McLanePlanarity {
         //Είσοδος δεδομένων
         boolean[][] adj; //πίνακας γειτνίασης
         int vertices;    //πλήθος κορυφών
+        int edges;       //πλήθος ακμών
 
-        try (BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream("inputMcLane.txt"))){
-            vertices = Character.getNumericValue((char) bufferedInputStream.read());
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("inputEul.txt"))) {
+            String[] lineSplit = bufferedReader.readLine().trim().split(" ");
+            vertices = Integer.valueOf(lineSplit[0]);
+            edges = Integer.valueOf(lineSplit[1]);
 
             adj = new boolean[vertices][vertices];
 
             int i = 0;
-            int j = 0;
-            char readChar;
+            while (i < vertices) {
+                lineSplit = bufferedReader.readLine().trim().split(" ");
 
-            while(i < vertices){
-                readChar = ((char) bufferedInputStream.read());
-                if (readChar == '0' || readChar == '1'){
-                    adj[i][j] = readChar == '1';
-                    j++;
-                    if (j == vertices) {
-                        j = 0;
-                        i++;
+                for (int j = 0; j < vertices; j++) {
+                    if (Integer.valueOf(lineSplit[j]) == 1){
+                        adj[i][j] = true;
+                    }
+                    else{
+                        adj[i][j] = false;
                     }
                 }
+
+                i++;
             }
 
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             System.err.println(e.getMessage());
             return;
         }

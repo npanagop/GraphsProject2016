@@ -24,35 +24,46 @@ public class FleuryAlg {
         int vertices;    //πλήθος κορυφών
         int edges;       //πλήθος ακμών
 
-        try (BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream("inputEul.txt"))){
-            vertices = Character.getNumericValue((char) bufferedInputStream.read());
-            bufferedInputStream.read();
-            edges = Character.getNumericValue((char) bufferedInputStream.read());
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("inputEul.txt"))) {
+            String[] lineSplit = bufferedReader.readLine().trim().split(" ");
+            vertices = Integer.valueOf(lineSplit[0]);
+            edges = Integer.valueOf(lineSplit[1]);
 
             adj = new boolean[vertices][vertices];
 
             int i = 0;
-            int j = 0;
-            char readChar;
+            while (i < vertices) {
+                lineSplit = bufferedReader.readLine().trim().split(" ");
 
-            while(i < vertices){
-                readChar = ((char) bufferedInputStream.read());
-                if (readChar == '0' || readChar == '1'){
-                    adj[i][j] = readChar == '1';
-                    j++;
-                    if (j == vertices) {
-                        j = 0;
-                        i++;
+                for (int j = 0; j < vertices; j++) {
+                    if (Integer.valueOf(lineSplit[j]) == 1){
+                        adj[i][j] = true;
+                    }
+                    else{
+                        adj[i][j] = false;
                     }
                 }
+
+                i++;
             }
 
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             System.err.println(e.getMessage());
             return;
         }
         //**************************************************
+
+        for (int i = 0; i < vertices; i++) {
+            for (int j = 0; j < vertices; j++) {
+                if (adj[i][j]){
+                    System.out.print("1 ");
+                }
+                else{
+                    System.out.print("0 ");
+                }
+            }
+            System.out.println();
+        }
 
         //Αρχικοποίηση δομών
 

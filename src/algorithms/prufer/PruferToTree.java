@@ -15,19 +15,15 @@ import java.util.ArrayList;
 public class PruferToTree {
     public static void main(String[] args) {
         //Είσοδος δεδομένων
+
+        //Ο κώδικας Prufer
         ArrayList<Integer> pruferCode = new ArrayList<>();
-        try (BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream("inputPruferCode.txt"))){
-            char readChar;
-            int stop = 0;
-            while(stop<2){
-                readChar = ((char) bufferedInputStream.read());
-                if (Character.isDigit(readChar)){
-                    stop = 0;
-                    pruferCode.add(Character.getNumericValue(readChar));
-                }
-                else{
-                    stop++;
-                }
+
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("inputPruferCode.txt"))){
+            String[] lineSplit = bufferedReader.readLine().trim().split(" ");
+
+            for (String value : lineSplit){
+                pruferCode.add(Integer.valueOf(value));
             }
         }
         catch (IOException e){

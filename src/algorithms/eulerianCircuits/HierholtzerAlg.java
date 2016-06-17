@@ -1,6 +1,9 @@
 package algorithms.eulerianCircuits;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.IdentityHashMap;
+import java.util.IntSummaryStatistics;
 import java.util.Stack;
 
 /**
@@ -19,26 +22,29 @@ public class HierholtzerAlg {
         //Είσοδος δεδομένων
         boolean[][] adj; //πίνακας γειτνίασης
         int vertices;    //πλήθος κορυφών
+        int edges;       //πλήθος ακμών
 
-        try (BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream("inputEul.txt"))) {
-            vertices = Character.getNumericValue((char) bufferedInputStream.read());
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("inputEul.txt"))) {
+            String[] lineSplit = bufferedReader.readLine().trim().split(" ");
+            vertices = Integer.valueOf(lineSplit[0]);
+            edges = Integer.valueOf(lineSplit[1]);
 
             adj = new boolean[vertices][vertices];
 
             int i = 0;
-            int j = 0;
-            char readChar;
-
             while (i < vertices) {
-                readChar = ((char) bufferedInputStream.read());
-                if (readChar == '0' || readChar == '1') {
-                    adj[i][j] = readChar == '1';
-                    j++;
-                    if (j == vertices) {
-                        j = 0;
-                        i++;
+                lineSplit = bufferedReader.readLine().trim().split(" ");
+
+                for (int j = 0; j < vertices; j++) {
+                    if (Integer.valueOf(lineSplit[j]) == 1){
+                        adj[i][j] = true;
+                    }
+                    else{
+                        adj[i][j] = false;
                     }
                 }
+
+                i++;
             }
 
         } catch (IOException e) {
@@ -46,6 +52,18 @@ public class HierholtzerAlg {
             return;
         }
         //**************************************************
+
+        for (int i = 0; i < vertices; i++) {
+            for (int j = 0; j < vertices; j++) {
+                if (adj[i][j]){
+                    System.out.print("1 ");
+                }
+                else{
+                    System.out.print("0 ");
+                }
+            }
+            System.out.println();
+        }
 
         //Αρχικοποίηση δομών
 
@@ -57,12 +75,15 @@ public class HierholtzerAlg {
         int currentVertex = 0;
         int nextVertex;
 
-        Stack<Integer> neighbors = getNeighbors(adj,currentVertex);
+        ArrayList<Integer> neighbors = getNeighbors(adj,currentVertex);
+        System.out.println(neighbors.toString());
 
         //Όσο υπάρχει γειτονική κορυφή
-        while (!neighbors.isEmpty()) {
+        while (!neighbors.isEmpty()) {;
             //η επόμενη κορυφή που θα πάει ο αλγόριθμος
-            nextVertex = neighbors.pop();
+            nextVertex = neighbors.get(0);
+            neighbors.remove(0);
+            //System.out.println("next vertex : "+nextVertex);
             //βάλε την κορυφή στο προσωρινό κύκλωμα
             tempCircuit.push(currentVertex);
 
@@ -73,6 +94,7 @@ public class HierholtzerAlg {
             //εύρεση των γειτόνων της νέας κορυφής
             currentVertex = nextVertex;
             neighbors = getNeighbors(adj, currentVertex);
+            System.out.println(neighbors.toString());
             //αν είναι η τελευταία κορυφή που θα προσπελάσει ο αλγόριθμος, βάλτην στο προσωρινό κύκλωμα
             if (neighbors.isEmpty()){
                 tempCircuit.push(currentVertex);
@@ -90,7 +112,8 @@ public class HierholtzerAlg {
             neighbors = getNeighbors(adj, currentVertex);
             //επανέλαβε το πρώτο while από τη νέα κορυφή
             while (!neighbors.isEmpty()){
-                nextVertex = neighbors.pop();
+                nextVertex = neighbors.get(0);
+                neighbors.remove(0);
                 tempCircuit.push(currentVertex);
 
                 adj[currentVertex][nextVertex] = false;
@@ -119,13 +142,15 @@ public class HierholtzerAlg {
      * Μέθοδος για την έβρεση των γειτονικών κορυφών μια κορυφής.
      * @param adj Πίνακας γειτνίασης του γράφου.
      * @param currentVertex Κορυφή για την οποία ψάχνουμε τους γείτονες της.
-     * @return Στοίβα με τους γείτονες της κορυφής.
+     * @return Πίνακας με τους γείτονες της κορυφής.
      */
-    private static Stack<Integer> getNeighbors(boolean[][] adj, int currentVertex){
-        Stack<Integer> neighbors = new Stack<>();
+    private static ArrayList<Integer> getNeighbors(boolean[][] adj, int currentVertex){
+        System.out.println("Vertex: "+currentVertex);
+        ArrayList<Integer> neighbors = new ArrayList<>();
         for (int i = 0; i < adj.length; i++) {
             if (adj[currentVertex][i]) {
-                neighbors.push(i);
+                System.out.println("Neighbor : "+i);
+                neighbors.add(i);
             }
         }
         return neighbors;

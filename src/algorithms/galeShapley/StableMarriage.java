@@ -28,9 +28,8 @@ public class StableMarriage {
         int pairs; //το πλήθος τον ζευγαριών
 
         //Ανάγνωση από το αρχείο
-        try (BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream("inputSM.txt"))){
-
-            pairs = Character.getNumericValue((char) bufferedInputStream.read());
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("inputSM.txt"))){
+            pairs = Integer.valueOf(bufferedReader.readLine().trim());
             int separate = pairs * pairs;
             //αρχικοποίηση πινάκων
             for (int i = 0; i < pairs; i++) {
@@ -43,15 +42,14 @@ public class StableMarriage {
                 }
             }
 
+            String[] lineSplit;
             int counter = 0;
             int personA, personB, preference;
-            while(bufferedInputStream.available()>0){
-                personA = Character.getNumericValue((char) bufferedInputStream.read());
-                if (personA == -1) continue; //προσπέραση κενού
-                bufferedInputStream.read(); //προσπέραση κενού
-                personB = Character.getNumericValue((char) bufferedInputStream.read());
-                bufferedInputStream.read(); //προσπέραση κενού
-                preference = Character.getNumericValue((char) bufferedInputStream.read());
+            while(counter < 2*separate){
+                lineSplit = bufferedReader.readLine().trim().split(" ");
+                personA = Integer.valueOf(lineSplit[0]);
+                personB = Integer.valueOf(lineSplit[1]);
+                preference = Integer.valueOf(lineSplit[2]);
                 if (counter<separate){ //αν τα δεδομένα αφορούν τους άντρες
                     menPreferences.get(personA).set(preference-1, personB);
                 }
