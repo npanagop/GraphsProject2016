@@ -176,7 +176,7 @@ public class FleuryAlg {
      * ή πρόγονο του u από έναν υποδένδρο με ρίζα το v.
      * @param adj Πίνακας γειτνίασης του γράφου.
      * @param bridges Πίνακας που περιέχει τις ακμές που είναι γέφυρες του γράφου.
-     * @param u Η επόμενη κορυφή που θα διασχίσει ο αλγόριθμος.
+     * @param currentVertex Η επόμενη κορυφή που θα διασχίσει ο αλγόριθμος.
      * @param visited Πίνακας με τις κορυφές που έχει ηδη επισκεφτεί ο αλγόριθμος.
      * @param disc Η χρόνοι επίσκεψεις για κάθε κορυφή που έχει επισκεφτεί ο αλγόριθμος.
      * @param low Πίνακας με την πιο παλιά κορυφή που μπορούμε να φτάσουμε από το υποδένδρο της κορυφής που αντιστοιχεί
@@ -184,29 +184,29 @@ public class FleuryAlg {
      * @param parent Πίνακας με τις κορυφές προγόνους.
      * @param time Ο "χρόνος" του αλγορίθμου.
      */
-    private static void bridgeDFS(boolean[][] adj, ArrayList<Pair<Integer, Integer>> bridges,int u,
+    private static void bridgeDFS(boolean[][] adj, ArrayList<Pair<Integer, Integer>> bridges,int currentVertex,
                                   boolean visited[], int disc[], int low[], int parent[], int time){
 
-        visited[u] = true;
-        disc[u] = low[u] = ++time;
+        visited[currentVertex] = true;
+        disc[currentVertex] = low[currentVertex] = ++time;
 
         //Για κάθε γείτονα της u
         for (int i = 0; i < adj.length; i++) {
-            if (adj[u][i]){
+            if (adj[currentVertex][i]){
                 if (!visited[i]){
 
-                    parent[i] = u;
+                    parent[i] = currentVertex;
                     bridgeDFS(adj, bridges, i, visited, disc, low, parent, time);
 
-                    low[u] = Math.min(low[u], low[i]);
+                    low[currentVertex] = Math.min(low[currentVertex], low[i]);
 
                     //Αν η πιο παλιά κορυφή που φτάνουμε από το v είναι πιο παλιά απο τη u, τότε η ακμή u-v είναι γέφυρα
-                    if (low[i] > disc[u]){
-                        bridges.add(new Pair<>(u,i));
+                    if (low[i] > disc[currentVertex]){
+                        bridges.add(new Pair<>(currentVertex,i));
                     }
                 }
-                else if (i != parent[u]){
-                    low[u] = Math.min(low[u], disc[i]);
+                else if (i != parent[currentVertex]){
+                    low[currentVertex] = Math.min(low[currentVertex], disc[i]);
                 }
             }
         }
